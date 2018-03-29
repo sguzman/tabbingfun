@@ -1,12 +1,13 @@
 package com.github.sguzman.js.go
 
+import com.definitelyscala.fullpagejs.{FullPageJsOptions, JQuery}
 import com.thoughtworks.binding.Binding.Vars
 import com.thoughtworks.binding.{Binding, dom}
 import io.circe.generic.auto._
 import io.circe.parser.decode
-import org.scalajs.dom.{Element, document, window}
 import org.scalajs.dom.html.Div
 import org.scalajs.dom.raw.ClientRect
+import org.scalajs.dom.{Element, document, window}
 
 import scala.collection.mutable
 import scala.scalajs.js
@@ -16,7 +17,7 @@ object Main {
   @dom def _render(items: Vars[AnimeMeta]): com.thoughtworks.binding.Binding[org.scalajs.dom.html.Div] = {
     <div>
       <header>
-        <h1 id="header">HELLO</h1>
+        <h1 id="header">Anime</h1>
       </header>
       <main>
         <div id="container">
@@ -26,8 +27,8 @@ object Main {
                 <li class="anime-list-item">
                   <div class="div-item">
                     <img class="thumbnail" title={i.animeHash.animeEps.anime.img} />
-                    <h6>{i.animeHash.animeEps.anime.title}</h6>
-                    <aside>{i.links.length} Episode(s)</aside>
+                    <p class="mini-title">{i.animeHash.animeEps.anime.title}</p>
+                    <aside>{i.links.length.toString} Episode(s)</aside>
                   </div>
                 </li>
               }
@@ -82,6 +83,8 @@ object Main {
         imgs -= a
       }
     }
+
+    (new JQuery{}).fullpage(new FullPageJsOptions {})
 
     window.onscroll = (e) => {
       imgs.foreach{a =>
