@@ -3,7 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Anime</title>
-    <script src="https://cdn.rawgit.com/sguzman/GoJS/7e4777fa/items.js"></script>
+    <script src="https://cdn.rawgit.com/sguzman/GoJS/1a7e272c/items.js"></script>
+    <style>
+        body {
+            background: url("./wallpaper.jpg") no-repeat fixed;
+            padding-top: 0;
+        }
+
+        img.thumbnail {
+            width: 255px;
+            height: 400px;
+        }
+
+        div.div-item {
+            height: 550px;
+            width: 260px;
+            background-color: #FFC4DF;
+            margin-right: 5px;
+            margin-bottom: 10px;
+            padding: 4px;
+            overflow: hidden;
+        }
+
+        div.div-item:hover {
+            background-color: #a57c8f;
+        }
+
+        li.anime-list-item {
+            list-style-type: none;
+            float: left;
+        }
+    </style>
 </head>
 <body>
     <script src="./target/scala-2.12/gowatchscala-js-fastopt.js"></script>
