@@ -35,7 +35,7 @@ libraryDependencies ++= Seq(
   "com.thoughtworks.binding" %%% "dom" % "11.0.1",
   "io.circe" %%% "circe-core" % "0.9.2",
   "io.circe" %%% "circe-parser" % "0.9.2",
-  "io.circe" %%% "circe-generic" % "0.9.2"
+  "io.circe" %%% "circe-generic" % "0.9.2",
 )
 
 addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
