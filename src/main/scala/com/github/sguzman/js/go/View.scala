@@ -3,7 +3,7 @@ package com.github.sguzman.js.go
 import com.thoughtworks.binding.Binding.{Var, Vars}
 import com.thoughtworks.binding.{Binding, dom}
 import org.scalajs.dom.Event
-import org.scalajs.dom.html.{Div, Select, Span}
+import org.scalajs.dom.html.{Div, IFrame, Select, Span}
 import org.scalajs.dom.document
 
 object View {
@@ -48,7 +48,7 @@ object View {
             <p>Episode {(ep.bind + 1).toString}</p>
             <button onclick={_: Event => ep.value -= 1} disabled={ep.bind == 0}>Prev</button>
             <button onclick={_: Event => ep.value += 1} disabled={anime.bind.eps.length - 1 == ep.bind}>Next</button>
-            <iframe src={s"https:${anime.bind.eps(ep.bind)}"}></iframe>
+            <iframe id="iframe" onload={_: Event => "iframe".id[IFrame].setAttribute("allowfullscreen", "true")} src={s"https:${anime.bind.eps(ep.bind)}"}></iframe>
           </div>
         </div>
         <br />
