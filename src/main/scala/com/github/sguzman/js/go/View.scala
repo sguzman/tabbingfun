@@ -36,19 +36,23 @@ object View {
 
       <!-- Modal content -->
       <div class="modal-content">
-        <span onclick={_: Event => "modal".id[Div].style.display = "none"} id="close">&times;</span>
+        <span onclick={_: Event =>
+          "modal".id[Div].style.display = "none"
+          anime.value = anime.value
+        } id="close">&times;</span>
         <div>
-          <h2>{anime.bind.title}</h2>
+          <h2 class="anime-title">{anime.bind.title}</h2>
           <h3>{anime.bind.eps.length.toString} Episode(s)</h3>
-          <img src={s"http:${anime.bind.img}"} />
+          <img class="image" src={s"http:${anime.bind.img}"} />
           <div>
-            <p>Episode {ep.bind.toString}</p>
+            <p>Episode {(ep.bind + 1).toString}</p>
             <button onclick={_: Event => ep.value -= 1} disabled={ep.bind == 0}>Prev</button>
             <button onclick={_: Event => ep.value += 1} disabled={anime.bind.eps.length - 1 == ep.bind}>Next</button>
             <iframe src={s"https:${anime.bind.eps(ep.bind)}"}></iframe>
           </div>
         </div>
-        <p>{anime.bind.desc}</p>
+        <br />
+        <p class="desc">{anime.bind.desc}</p>
       </div>
 
     </div>
