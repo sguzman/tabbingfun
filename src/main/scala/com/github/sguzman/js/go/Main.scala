@@ -1,19 +1,16 @@
 package com.github.sguzman.js.go
 
-import com.thoughtworks.binding.Binding.{Var, Vars}
-import io.circe.generic.auto._
-import io.circe.parser.decode
+import com.thoughtworks.binding.{Binding, dom}
 import org.scalajs.dom.document
+import org.scalajs.dom.html.Div
 
 object Main {
-  def render(items: List[AnimeMeta]) = {
-    val list = Vars(items: _*)
-    View._render(list, Var(list.value.head), Var(25), Var(0), Var(""), Var(0))
+  @dom def render: Binding[Div] = {
+    <div>
+      <h1>Hello</h1>
+    </div>
   }
-
   def main(args: Array[String]): Unit = {
-    val items = decode[Map[String, AnimeMeta]](JS.JSON.stringify(JS.Globals.shows)).right.get
-    val values = items.values.toList.sortBy(_.animeHash.animeEps.anime.title)
-    com.thoughtworks.binding.dom.render(document.body, render(values))
+    com.thoughtworks.binding.dom.render(document.body, render)
   }
 }

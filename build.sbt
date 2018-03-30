@@ -3,7 +3,7 @@ enablePlugins(ScalaJSPlugin)
 scalaJSUseMainModuleInitializer := true
 
 /** Name of project */
-name := "GoWatchScala.js"
+name := "Jolt.js"
 
 /** Organization */
 organization := "com.github.sguzman"
