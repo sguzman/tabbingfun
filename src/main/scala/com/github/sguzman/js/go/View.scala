@@ -31,12 +31,36 @@ object View {
     </select>
   }
 
-  @dom def _render(items: List[Model], pageSize: Var[Int], idx: Var[Int]): Binding[Div] = {
+  @dom def modal(anime: Var[Model], ep: Var[Int]): Binding[Div] = {
+    <div id="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span onclick={_: Event => "modal".id[Div].style.display = "none"} id="close">&times;</span>
+        <div>
+          <h2>{anime.bind.title}</h2>
+          <h3>{anime.bind.eps.length.toString} Episode(s)</h3>
+          <img src={s"http:${anime.bind.img}"} />
+          <div>
+            <p>Episode {ep.bind.toString}</p>
+            <button onclick={_: Event => ep.value -= 1} disabled={ep.bind == 0}>Prev</button>
+            <button onclick={_: Event => ep.value += 1} disabled={anime.bind.eps.length - 1 == ep.bind}>Next</button>
+            <iframe src={s"https:${anime.bind.eps(ep.bind)}"}></iframe>
+          </div>
+        </div>
+        <p>{anime.bind.desc}</p>
+      </div>
+
+    </div>
+  }
+
+  @dom def _render(items: List[Model], pageSize: Var[Int], idx: Var[Int], anime: Var[Model], ep: Var[Int]): Binding[Div] = {
     <div>
       <header>
         <h1>Anime</h1>
       </header>
       <article>
+        {modal(anime, ep).bind}
         <div id="container">
           {select(idx, pageSize).bind}
           {buttons(idx, pageSize, items.length).bind}
@@ -44,7 +68,10 @@ object View {
             {
               for (i <- Vars(items.grouped(pageSize.bind).toList(idx.bind): _*)) yield {
                 <li class="anime-list-item">
-                  <div class="div-item">
+                  <div onclick={_: Event =>
+                    anime.value = i
+                    "modal".id[Div].style.display = "block"
+                  } class="div-item">
                     <b class="mini-title">{i.title}</b>
                     <img class="thumbnail" src={s"http:${i.img}"} />
                     <aside>{i.eps.length.toString} episode(s)</aside>
