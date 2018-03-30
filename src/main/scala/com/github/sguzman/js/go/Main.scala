@@ -6,7 +6,10 @@ import io.circe.parser.decode
 import org.scalajs.dom.document
 
 object Main {
-  def render(items: List[AnimeMeta]) = View._render(Vars(items: _*), Var(25), Var(0), Var(""))
+  def render(items: List[AnimeMeta]) = {
+    val list = Vars(items: _*)
+    View._render(list, Var(list.value.head), Var(25), Var(0), Var(""), Var(0))
+  }
 
   def main(args: Array[String]): Unit = {
     val items = decode[Map[String, AnimeMeta]](JS.JSON.stringify(JS.Globals.shows)).right.get
