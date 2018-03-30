@@ -11,7 +11,6 @@ object Main {
   def main(args: Array[String]): Unit = {
     val items = decode[Map[String, AnimeMeta]](JS.JSON.stringify(JS.Globals.shows)).right.get
     val values = items.values.toList.sortBy(_.animeHash.animeEps.anime.title)
-
     com.thoughtworks.binding.dom.render(document.body, render(values))
   }
 }
